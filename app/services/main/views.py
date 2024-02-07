@@ -8,4 +8,4 @@ main_bp = Blueprint(
 
 @main_bp.route('/')
 def index():
-    return render_template('shared/_layout.html')
+    return render_template('shared/_dashboard.html', active='dashboard')

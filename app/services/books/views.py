@@ -10,7 +10,7 @@ book_bp = Blueprint(
 @book_bp.route('/books', methods=['GET', 'POST'])
 def index():
     
-    return render_template('books/index.html')
+    return render_template('books/index.html', active = 'books')
 
 # Add other routes here
 # View, Delete, Add, Update Book data.
