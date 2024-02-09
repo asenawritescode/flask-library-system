@@ -9,3 +9,7 @@ users_bp = Blueprint(
 @users_bp.route('/users', methods=['GET', 'POST'])
 def index():
     return render_template('users/index.html', active='users')
+
+@users_bp.route('/users/create', methods=['GET', 'POST'])
+def create_user():
+    return render_template('users/create_user.html', active ='actions')

@@ -1,0 +1,1 @@
+from app.services.reports.views import reports_bp

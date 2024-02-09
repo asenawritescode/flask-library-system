@@ -36,4 +36,7 @@ def create_app(config_name):
     from .services.users import users_bp
     app.register_blueprint(users_bp)
 
+    from .services.reports import reports_bp
+    app.register_blueprint(reports_bp)
+
     return app
