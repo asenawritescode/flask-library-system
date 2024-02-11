@@ -1,9 +1,10 @@
+
 import click
-# from lib import create_app
-from app import create_app
-# Import dependencies here
-# For example, if you were using SQLAlchem
-# from app import create_app, db
+# from flask_migrate import Migrate
+from app import create_app, db
+
+from app.models import *
+
 
 
 @click.group()
@@ -24,19 +25,35 @@ def cli():
 )
 def runserver(env, port):
     app = create_app(env)
+    with app.app_context():
+        db.create_all()
     app.run(port=port)
 
-# Add other commands here
-# Eg.
-# def initdb():
-#    ''' Create the SQL DB '''
-#    db.create_all()
+# @click.command()
+# @click.option(
+#     '--env', default='development',
+#     help='Environment to use while running server',
+#     type=click.STRING
+# )
+# def migrate(env):    
+#     create_app(env)
+#     # Migrate(app, db)
+#     print('Running Migrations')
 
+# @click.command()
+# @click.option(
+#     '--env', default='development',
+#     help='Environment to use while running server',
+#     type=click.STRING
+# )
+# def init_db(env):
+#     app = create_app(env)
+#     db.create_all(app)
+#     return
 
 cli.add_command(runserver)
-# Register other commands here
-# Eg.
-# cli.add_command(initdb)
+# cli.add_command(init_db)
+# cli.add_command(migrate)
 
 if __name__ == "__main__":
     cli()

@@ -31,6 +31,8 @@ class Development:
     TESTING = False
     ENV = 'development'
     SECRET_KEY = 'development_secret_key'
+    SQLALCHEMY_TRACK_MODIFICATIONS=False
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///db.sqlite'
 
     @staticmethod
     def init_app(app):

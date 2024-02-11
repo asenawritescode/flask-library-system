@@ -1,4 +1,9 @@
 from flask import render_template, Blueprint, request
+
+from app import db
+from app.models import Book
+from app.utils.convert_date import convert
+
 book_bp = Blueprint(
     'book',
     __name__,
@@ -20,21 +25,18 @@ def create_book():
         #todo:Grab data from form and Push user to database... 
         book_name = request.form.get('book_name')
         author = request.form.get('author')
-        publication_date = request.form.get('publication_date')
+        publication_date = convert(request.form.get('publication_date'))
         isbn = request.form.get('isbn')
         units = request.form.get('units')
         description = request.form.get('description')
         
         # Push book to database
-        # book = Book(book_name=book_name, author=author, publication_date=publication_date, isbn=isbn, units=units, description=description)
-        # db.session.add(book)
-        # db.session.commit()
-
-        # how can I do this above ?
+        try:
+            Book.create(name=book_name, author=author, publication_date=publication_date, isbn=isbn, quantity=units, description=description)
+        except:
+        #     # this message shouled be flashed to the user
+        #     # flash
+            return {"message": "Book not created!"}
         
-
-        return {"message": "User created successfully!"}
+        return render_template('books/index.html', active ='dashboard')
     return render_template('books/create_book.html', active = 'actions')
-
-# Add other routes here
-# View, Delete, Add, Update Book data.

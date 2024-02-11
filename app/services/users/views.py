@@ -1,4 +1,8 @@
 from flask import render_template, Blueprint, request
+
+from app import db
+from app.models import User
+
 users_bp = Blueprint(
     'users',
     __name__,
@@ -21,9 +25,12 @@ def create_user():
         phone_number = request.form.get('phone_number')
         
         # Push user to database
-        # user = User(first_name=first_name, last_name=last_name, email=email)
-        # db.session.add(user)
-        # db.session.commit()
-
-        return {"message": "User created successfully!"}
+        try:
+            User.create(first_name=first_name, last_name=last_name, email=email, reg_number=reg_number, phone_number=phone_number)
+        except:
+            # this message shouled be flashed to the user
+            # flash
+            return {"message": "User not created!"}
+        
+        return render_template('users/index.html', active ='dashboard')
     return render_template('users/create_user.html', active ='actions')
