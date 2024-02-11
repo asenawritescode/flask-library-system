@@ -14,8 +14,9 @@ book_bp = Blueprint(
 
 @book_bp.route('/books', methods=['GET', 'POST'])
 def index():
+    books = Book.get_all()
 
-    return render_template('books/index.html', active = 'books')
+    return render_template('books/index.html', active = 'books', books=books)
 
 
 @book_bp.route('/books/create', methods=['GET', 'POST'])
