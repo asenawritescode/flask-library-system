@@ -27,7 +27,7 @@
             <thead>
               <tr
                 class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                <th class="px-4 py-3">Name</th>
+                <th class="px-4 py-3">Title</th>
                 <th class="px-4 py-3">Author</th>
                 <th class="px-4 py-3">ISBN</th>
                 <th class="px-4 py-3">Status</th>
@@ -36,22 +36,21 @@
               </tr>
             </thead>
             <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-              <tr class="text-gray-700 dark:text-gray-400">
-                <td class="px-4 py-3">
+              <!-- get dta from books -->
+              {% for book in books %}
+              <tr class="text-gray-700 dark:text-gray-400" >
+                <td class="px-4 py-3 ">
                   <div class="flex items-center text-sm">
                     <div>
-                      <p class="font-semibold">Mark Twain</p>
-                      <p class="text-xs text-gray-600 dark:text-gray-400">
-                        10x Developer
-                      </p>
+                      <p class="font-semibold ">{{ book.name|truncate(50,true,'...') }}</p>
                     </div>
                   </div>
                 </td>
                 <td class="px-4 py-3 text-sm">
-                  Mark Twain
+                  {{book.author}}
                 </td>
                 <td class="px-4 py-3 text-sm">
-                  ISBN
+                  {{book.isbn}}
                 </td>
                 <td class="px-4 py-3 text-xs">
                   <span
@@ -60,7 +59,7 @@
                   </span>
                 </td>
                 <td class="px-4 py-3 text-sm">
-                  6-10-2020
+                  {{book.publication_date}}
                 </td>
                 <td class="px-4 py-3">
                   <div class="flex items-center space-x-4 text-sm">
@@ -94,6 +93,7 @@
                   </div>
                 </td>
               </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>

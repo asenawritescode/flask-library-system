@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint, request
+from flask import render_template, Blueprint, request, redirect, url_for
 
 from app import db
 from app.models import Book
@@ -34,10 +34,10 @@ def create_book():
         # Push book to database
         try:
             Book.create(name=book_name, author=author, publication_date=publication_date, isbn=isbn, quantity=units, description=description)
+            return redirect(url_for('.index'))
         except:
         #     # this message shouled be flashed to the user
         #     # flash
             return {"message": "Book not created!"}
         
-        return render_template('books/index.html', active ='dashboard')
     return render_template('books/create_book.html', active = 'actions')

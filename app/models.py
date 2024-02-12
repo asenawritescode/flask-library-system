@@ -53,7 +53,6 @@ class CRUDMixin:
         """Search records based on query."""
         return cls.query.filter(cls.__searchable__.match(query)).paginate(page, per_page, False)
 
-
 class Book(db.Model, CRUDMixin):
 
     __tablename__ = 'books'
