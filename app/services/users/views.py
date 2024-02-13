@@ -33,10 +33,10 @@ def create_user():
         # Push user to database
         try:
             User.create(first_name=first_name, last_name=last_name, email=email, reg_number=reg_number, phone_number=phone_number)
+            return redirect(url_for('.index'))
         except:
             # this message shouled be flashed to the user
             # flash
             return {"message": "User not created!"}
         
-        return render_template('users/index.html', active ='dashboard')
     return render_template('users/create_user.html', active ='actions')
