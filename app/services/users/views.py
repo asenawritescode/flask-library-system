@@ -1,7 +1,8 @@
-from flask import render_template, Blueprint, request
+from flask import render_template, Blueprint, request, redirect, url_for
 
 from app import db
 from app.models import User
+from configs import *
 
 users_bp = Blueprint(
     'users',
@@ -13,8 +14,11 @@ users_bp = Blueprint(
 @users_bp.route('/users', methods=['GET', 'POST'])
 def index():
 
-    users = User.get_all()
-    return render_template('users/index.html', active='users', users=users)
+    page = request.args.get('page', 1, type=int)
+
+    paginated_data = User.paginate(page=page, per_page=RESULTS_PER_PAGE)
+
+    return render_template('users/index.html', active='users', users=paginated_data.items, pagination = paginated_data)
 
 @users_bp.route('/users/create', methods=['GET', 'POST'])
 def create_user():

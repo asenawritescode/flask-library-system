@@ -21,8 +21,6 @@ def index():
 
     paginated_data = Book.paginate(page=page, per_page=RESULTS_PER_PAGE)
 
-    print(paginated_data.has_next)
-
     return render_template('books/index.html', active = 'books', books=paginated_data.items, pagination=paginated_data)
 
 
