@@ -1,8 +1,10 @@
+from math import ceil
 from flask import render_template, Blueprint, request, redirect, url_for
 
 from app import db
 from app.models import Book
 from app.utils.convert_date import convert
+from configs import *
 
 book_bp = Blueprint(
     'book',
@@ -14,9 +16,14 @@ book_bp = Blueprint(
 
 @book_bp.route('/books', methods=['GET', 'POST'])
 def index():
-    books = Book.get_all()
 
-    return render_template('books/index.html', active = 'books', books=books)
+    page = request.args.get('page', 1, type=int)
+
+    paginated_data = Book.paginate(page=page, per_page=RESULTS_PER_PAGE)
+
+    print(paginated_data.has_next)
+
+    return render_template('books/index.html', active = 'books', books=paginated_data.items, pagination=paginated_data)
 
 
 @book_bp.route('/books/create', methods=['GET', 'POST'])

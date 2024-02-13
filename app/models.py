@@ -44,14 +44,15 @@ class CRUDMixin:
         return cls.query.filter_by(**kwargs)
 
     @classmethod
-    def paginate(cls, page=1, per_page=10, **kwargs):
+    def paginate(cls, page, per_page, **kwargs):
         """Paginate records."""
-        return cls.query.filter_by(**kwargs).paginate(page, per_page, False)
-
+        return cls.query.paginate(page=page, per_page=per_page, error_out = False)    
+        
     @classmethod
     def search(cls, query, page=1, per_page=10):
         """Search records based on query."""
         return cls.query.filter(cls.__searchable__.match(query)).paginate(page, per_page, False)
+        
 
 class Book(db.Model, CRUDMixin):
 
