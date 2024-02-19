@@ -18,7 +18,7 @@ def index():
 
     paginated_data = User.paginate(page=page, per_page=RESULTS_PER_PAGE)
 
-    return render_template('users/index.html', active='users', users=paginated_data.items, pagination = paginated_data)
+    return render_template('users/index.html', active='users', users=paginated_data.items or 'Hakuna', pagination = paginated_data)
 
 @users_bp.route('/users/create', methods=['GET', 'POST'])
 def create_user():
