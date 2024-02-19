@@ -21,7 +21,7 @@ def index():
 
     paginated_data = Book.paginate(page=page, per_page=RESULTS_PER_PAGE)
 
-    return render_template('books/index.html', active = 'books', books=paginated_data.items, pagination=paginated_data)
+    return render_template('books/index.html', active = 'books', books=paginated_data.items or 'Hakuna', pagination=paginated_data)
 
 
 @book_bp.route('/books/create', methods=['GET', 'POST'])
@@ -35,7 +35,7 @@ def create_book():
         isbn = request.form.get('isbn')
         units = request.form.get('units')
         description = request.form.get('description')
-        
+
         # Push book to database
         try:
             Book.create(name=book_name, author=author, publication_date=publication_date, isbn=isbn, quantity=units, description=description)

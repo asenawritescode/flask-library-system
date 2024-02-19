@@ -37,6 +37,14 @@
             </thead>
             <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
               <!-- get dta from books -->
+              <!-- Check if there are any books -->
+              {% if books == 'Hakuna' %}
+              <tr class="text-gray-700 dark:text-gray-400">
+                <td class="px-4 py-3 text-sm">
+                  No books found
+                </td>
+              </tr>
+              {% else %}
               {% for book in books %}
               <tr class="text-gray-700 dark:text-gray-400">
                 <td class="px-4 py-3 ">
@@ -94,14 +102,18 @@
                 </td>
               </tr>
               {% endfor %}
+              {% endif %}
             </tbody>
           </table>
         </div>
+        {% if books != 'Hakuna' %}
         <div
           class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
           <span class="flex items-center col-span-3">
+
             Showing {{ pagination.items[0].id }}-{% if pagination.has_next %}{{ pagination.items[-1].id }}{% else %}{{
             pagination.total }}{% endif %} of {{ (pagination.total + pagination.per_page - 1) // pagination.per_page}}
+
           </span>
           <span class="col-span-2"></span>
           <!-- Pagination -->
@@ -141,6 +153,7 @@
             </nav>
           </span>
         </div>
+        {% endif %}
       </div>
     </div>
 </main>
