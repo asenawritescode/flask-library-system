@@ -36,7 +36,15 @@ class CRUDMixin:
     @classmethod
     def get_all(cls):
         """Get all records."""
+        
+        #else just return all 
         return cls.query.all()
+
+    @classmethod
+    def get_all_from(cls, *columns, **kwargs):
+        """Get all records."""
+        column_objects = [getattr(cls, column) for column in columns]
+        return cls.query.filter_by(**kwargs).with_entities(*column_objects).all()
 
     @classmethod
     def filter_by(cls, **kwargs):
