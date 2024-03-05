@@ -8,12 +8,8 @@ body {
     margin: 0
 }
 
-#LendModal {
-    [x-cloak] { display: none; }
-}
-
-#ReceiveModal {
-    [x-cloak] { display: none; }
+[x-cloak] {
+    display: none;
 }
 
 main {

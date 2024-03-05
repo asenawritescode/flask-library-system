@@ -1,5 +1,5 @@
 from . import db
-
+# from flask_sqlalchemy.event import listen_for
 from datetime import datetime
 
 
@@ -36,8 +36,6 @@ class CRUDMixin:
     @classmethod
     def get_all(cls):
         """Get all records."""
-        
-        #else just return all 
         return cls.query.all()
 
     @classmethod
@@ -104,3 +102,5 @@ class Transaction(db.Model, CRUDMixin):
 
     user = db.relationship('User', backref='transactions')
     book = db.relationship('Book', backref='transactions')
+
+

@@ -28,20 +28,26 @@ def get_data():
     user_result = []
     for user in users:
         user_result.append({
-            # 'id': user.id,
-            'name': user.first_name + '' + user.last_name +' - '+ user.reg_number,
-            # 'reg_number': user.reg_number
+            'id': user.id,
+            'name': user.first_name + '' + user.last_name ,
+            'reg_number': user.reg_number,
+            'display': f"{user.first_name} {user.last_name} - {user.reg_number}"
         })
+        # user_result.append(f"{user.first_name} {user.last_name} - {user.reg_number}")
 
     # get books whose availability is more than 1 from database
-    available_books = Book.get_all_from('id','isbn' )
+    available_books = Book.get_all_from('id','isbn', 'name',  )
 
     book_result = []
     for book in available_books:
         book_result.append({
-            # 'id': book.id,
-            'isbn': book.isbn
+            'id': book.id,
+            'isbn': book.isbn,
+            'display': f"{book.isbn} - {book.name}"
         })
+        # conert int to str
+        
+        # book_result.append(f"{book.isbn} - {book.name}")
 
     # return json object with available_books and users
-    return jsonify({'users': user_result, 'books': book_result})
+    return jsonify([book_result, user_result])
