@@ -3,8 +3,7 @@
     x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
     x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0"
-    class="fixed inset-0 z-30 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center"
-    >
+    class="fixed inset-0 z-30 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center">
     <!-- Modal -->
 
     <!-- add an init to get data from the flask backend (users, books)  -->
@@ -16,7 +15,7 @@
         class="w-full px-6 py-4 overflow-hidden bg-white dark:bg-gray-800 rounded-t-lg sm:rounded-lg sm:m-4 sm:max-w-xl"
         role="dialog" id="{{modal_name}}">
         <!-- Remove header if you don't want a close icon. Use modal body to place modal tile. -->
-        <form method="POST" action="/transactions/create">
+        <form method="POST" action="/transactions/create?resource={{modal_name.lower()}}">
             <header class="flex justify-start">
                 <!-- Modal title -->
                 <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-300">
@@ -27,13 +26,28 @@
             <div class="mt-4 mb-6">
                 <!-- First searchable dropdown -->
 
-                <div x-init="optionData()" x-data="{ 
-                    open: false, options: [''], selected: null, query: '' , 
+                <div x-data="{ 
+                    open: false, options: [], selected: null, query: '' , 
                     optionData() {
-                        fetch('/get-data')
+                        fetch('/get-data?resource=' + '{{modal_name.lower()}}')
                             .then(response => response.json())
                             .then(data => {
-                                this.options = data[0]
+                                if('{{modal_name.lower()}}' == 'lendbook'){
+                                    this.options = data[0]
+                                }else{
+                                    const book_result = [];
+
+                                    for (const key in data) {
+                                        if (Object.hasOwnProperty.call(data, key)) {
+                                            const item = data[key];
+                                            book_result.push({
+                                            id: key,
+                                            display: item.name
+                                            });
+                                        }
+                                    }
+                                    this.options = book_result;
+                                }
                             });
                     },
                     get filteredItems() {
@@ -52,20 +66,20 @@
                         }
                         return i === query.length;
                     }    
-                }">
+                }" x-init="optionData()">
                     <p class="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
-                        Search for a Book
+                        Search for a {{modal_name}}
                     </p>
-                    <input x-model.debounce="query" @input="open = true" @click.away="open = false" type="text" 
+                    <input x-model.debounce="query" @input="open = true" @click.away="open = false" type="text"
                         class="w-full border rounded px-3 py-2 focus:outline-none focus:border-blue-500 dark:bg-gray-700 dark:text-white"
-                        placeholder="Search..." >
+                        placeholder="Search...">
                     <ul x-show="open && options.length > 0" @click.away="open = false"
                         class="w-full z-10 w-auto bg-white dark:bg-gray-700 border rounded mt-1 shadow-lg">
                         <template x-show="open && options.length > 0" x-for="(option, index) in filteredItems"
                             :key="index">
                             <li @click="selected = option.id; query = option.display; open = false"
                                 class="px-3 py-2 cursor-pointer hover:bg-gray-100 w-full">
-                                <span x-text="option.display" x-value="option.isbn" class="dark:text-white"></span>
+                                <span x-text="option.display" x-value="option.{{modal_name}}" class="dark:text-white"></span>
                             </li>
                         </template>
                     </ul>
@@ -78,10 +92,20 @@
                 <div x-init="optionData()" x-data="{ 
                     open: false, options: [''], selected: null, query: '' , 
                     optionData() {
-                        fetch('/get-data')
+                        fetch('/get-data?resource={{modal_name.lower()}}')
                             .then(response => response.json())
                             .then(data => {
-                                this.options = data[1]
+                                if('{{modal_name.lower()}}' == 'lendbook'){
+                                    this.options = data[1]
+                                }else{
+                                    var users = [];
+                                    for (var key in data) {
+                                        if (Object.hasOwnProperty.call(data, key)) {
+                                          users = users.concat(data[key].users);
+                                        }
+                                      }
+                                    this.options = users;
+                                }
                             });
                     },
                     get filteredItems() {
@@ -104,7 +128,7 @@
                     <p class="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
                         Search for a User
                     </p>
-                    <input x-model.debounce="query" @input="open = true" @click.away="open = false" type="text" 
+                    <input x-model.debounce="query" @input="open = true" @click.away="open = false" type="text"
                         class="w-full border rounded px-3 py-2 focus:outline-none focus:border-blue-500 dark:bg-gray-700 dark:text-white"
                         placeholder="Search..." />
                     <ul x-show="open && options.length > 0" @click.away="open = false"

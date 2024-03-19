@@ -18,7 +18,13 @@ def create_app(config_name):
     # Configure the extensions below ...
     # Eg.
     db.init_app(app)
-    # bootstrap.init_app(app)
+
+    # Load utility functions below ...
+    # Eg.
+    # from .utils import *
+    # 
+
+    # Register your blueprints here ...
     
     from .services.main import main_bp
     app.register_blueprint(main_bp)
