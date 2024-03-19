@@ -1,7 +1,6 @@
 from math import ceil
 from flask import render_template, Blueprint, request, redirect, url_for
 
-from app import db
 from app.models import Book
 from app.utils.convert_date import convert
 from configs import *

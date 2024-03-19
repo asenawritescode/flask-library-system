@@ -1,5 +1,7 @@
 from . import db
 
+# from flask_sqlalchemy.event import listen_for
+
 from datetime import datetime
 
 
@@ -37,6 +39,12 @@ class CRUDMixin:
     def get_all(cls):
         """Get all records."""
         return cls.query.all()
+
+    @classmethod
+    def get_all_from(cls, *columns, **kwargs):
+        """Get all records."""
+        column_objects = [getattr(cls, column) for column in columns]
+        return cls.query.filter_by(**kwargs).with_entities(*column_objects).all()
 
     @classmethod
     def filter_by(cls, **kwargs):
@@ -96,3 +104,14 @@ class Transaction(db.Model, CRUDMixin):
 
     user = db.relationship('User', backref='transactions')
     book = db.relationship('Book', backref='transactions')
+    
+# How can I group all transactions by user_id where all transaction count for user_ids are odd thentake the  latest transactions for each user.
+
+# Manipulate the data to form a json structure below
+
+# {
+# book_id: [user_id1, user...],
+# book_id2: [user_id3, user...],
+# }
+    
+    

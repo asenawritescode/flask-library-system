@@ -47,16 +47,28 @@ function data() {
     togglePagesMenu() {
       this.isPagesMenuOpen = !this.isPagesMenuOpen
     },
-    // Modal
-    isModalOpen: false,
-    trapCleanup: null,
-    openModal() {
-      this.isModalOpen = true
-      this.trapCleanup = focusTrap(document.querySelector('#modal'))
+    // lend modal
+    isLendBookModalOpen: false,
+    lendTrapCleanup: null,
+    openLendBookModal() {
+      this.isLendBookModalOpen = true
+      this.lendTrapCleanup = focusTrap(document.querySelector('#LendModal'))
     },
-    closeModal() {
-      this.isModalOpen = false
-      this.trapCleanup()
+    closeLendBookModal() {
+      this.isLendBookModalOpen = false
+      this.lendTrapCleanup()
     },
+    // receive modal
+    isReceiveBookModalOpen: false,
+    receiveTrapCleanup: null,
+    openReceiveBookModal() {
+      this.isReceiveBookModalOpen = true
+      this.receiveTrapCleanup = focusTrap(document.querySelector('#ReceiveModal'))
+    },
+    closeReceiveBookModal() {
+      this.isReceiveBookModalOpen = false
+      this.receiveTrapCleanup()
+    },
+    
   }
 }
