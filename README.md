@@ -17,15 +17,16 @@ Short description or purpose of the project.
 
 ## Overview
 
-Provide a brief overview of the project, its purpose, and any key features.
+This is a library management system that enables one to add a book  to the system, add a user and issue a book and request a return.
 
 ## Features
 
 List the key features or functionalities of the project.
 
-- Feature 1
-- Feature 2
-- Feature 3
+- Create a Book, User
+- Issue a book to a User  
+- Recieve a book from a User
+- Create an immutable record of the transactions (issue and recieve)
 
 ## Tech Stack
 
@@ -64,4 +65,4 @@ List the technologies and libraries used in the project.
 2. Access the application on the browser at 'http://localhost:5000'
 
 
-
+## Screenshots
