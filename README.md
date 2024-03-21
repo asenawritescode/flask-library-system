@@ -21,36 +21,32 @@ This is a library management system that enables one to add a book  to the syste
 
 The directory structure is as below :
     ```
-    project_root/
-    │
-    ├── app/
-    │   ├── services/
-    │   │   ├── books/
-    │   │   ├── main/
-    │   │   ├── reports/
-    │   │   ├── transactions/
-    │   │   └── users/
-    │   │
-    │   ├── static/
-    │   │   ├── css/
-    │   │   └── js/
-    │   │
-    │   ├── templates/
-    │   │   ├── books/
-    │   │   ├── error/
-    │   │   ├── reports/
-    │   │   ├── shared/
-    │   │   ├── transactions/
-    │   │   └── users/
-    │   │
-    │   ├── utils/
-    │   └── models/
-    │
-    ├── .gitignore
-    ├── configs.py
-    ├── run.py
-    ├── requirements.txt
-    └── readme.md
+    | - project_root/
+    |   | - app/
+    |   |   | - services/
+    |   |   |   | - books/
+    |   |   |   | - main/
+    |   |   |   | - reports/
+    |   |   |   | - transactions/
+    |   |   |   | - users/
+    |   |   | - static/
+    |   |   |   | - css/
+    |   |   |   | - js/
+    |   |   | - templates/
+    |   |   |   | - books/
+    |   |   |   | - error/
+    |   |   |   | - reports/
+    |   |   |   | - shared/
+    |   |   |   | - transactions/
+    |   |   |   | - users/
+    |   |   | - utils/
+    |   |   | - models/
+    |   | - .gitignore
+    |   | - configs.py
+    |   | - run.py
+    |   | - requirements.txt
+    |   | - readme.md
+
     ```
 P.S.
 Each individual service has to have a init file as a module in python and a views file where each route lies. 
