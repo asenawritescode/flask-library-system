@@ -21,7 +21,6 @@ This is a library management system that enables one to add a book  to the syste
 
 The directory structure is as below :
 
-    ```
     | - project_root/
     |   | - app/
     |   |   | - services/
@@ -47,7 +46,6 @@ The directory structure is as below :
     |   | - run.py
     |   | - requirements.txt
     |   | - readme.md
-    ```
 
 P.S.
 Each individual service has to have a init file as a module in python and a views file where each route lies. 
