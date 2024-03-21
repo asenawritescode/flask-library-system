@@ -57,9 +57,9 @@ List the key features or functionalities of the project.
 
 - Create a Book, User
 - Issue a book to a User 
-- Search for a book that is available before issuing 
+- Fuzzy Search for a book that is available before issuing 
 - Recieve a book from a User
-- Search for a book that is pending (issued to someone)
+- Fuzzy Search for a book that is pending (issued to someone)
 - Create an immutable record of the transactions (issue and recieve)
 
 
