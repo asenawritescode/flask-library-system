@@ -1,6 +1,6 @@
-# Project Name
+# FLASK LIBRARY MANAGEMENT SYSTEM
 
-Short description or purpose of the project.
+This is a library management system that enables one to add a book  to the system, add a user and issue a book and request a return.
 
 ![Project Screenshot](screenshot.png)
 
@@ -56,9 +56,19 @@ Each individual service has to have a init file as a module in python and a view
 List the key features or functionalities of the project.
 
 - Create a Book, User
-- Issue a book to a User  
+- Issue a book to a User 
+- Search for a book that is available before issuing 
 - Recieve a book from a User
+- Search for a book that is pending (issued to someone)
 - Create an immutable record of the transactions (issue and recieve)
+
+
+- I am partiularly excited about the pending book search algorithm that uses the immutable transaction records to check if a user has a pending book 
+
+TODO : 
+- Send Flash notification back to users
+- Ability to update both user details and book details
+- Feed report data to dashboard and reports page !
 
 ## Tech Stack
 
