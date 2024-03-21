@@ -20,6 +20,7 @@ Short description or purpose of the project.
 This is a library management system that enables one to add a book  to the system, add a user and issue a book and request a return.
 
 The directory structure is as below :
+
     ```
     | - project_root/
     |   | - app/
@@ -47,6 +48,7 @@ The directory structure is as below :
     |   | - requirements.txt
     |   | - readme.md
     ```
+
 P.S.
 Each individual service has to have a init file as a module in python and a views file where each route lies. 
 
