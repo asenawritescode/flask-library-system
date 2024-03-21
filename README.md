@@ -2,7 +2,7 @@
 
 This is a library management system that enables one to add a book  to the system, add a user and issue a book and request a return.
 
-![Project Screenshot](screenshot.png)
+![Project Screenshot](screenshots/EZLIB.png)
 
 ## Table of Contents
 
@@ -108,3 +108,11 @@ List the technologies and libraries used in the project.
 
 
 ## Screenshots
+
+![Transactions](screenshots/transactions.png)
+![Users](screenshots/users.png)
+![Books](screenshots/books.png)
+![Add User](screenshots/add-user.png)
+![Add Book](screenshots/add-book.png)
+![Lend Book](screenshots/lendbook.png)
+![Recieve Book](screenshots/recievebook.png)
