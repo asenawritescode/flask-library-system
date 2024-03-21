@@ -10,14 +10,7 @@ main_bp = Blueprint(
     url_prefix='/'
 )
 
-# def row2dict(row_data):
-#     result = {}
-#     for row in row_data:
-#         result.append({
-#             'id': row.id,
-#             'isbn': row.isbn,
-#         })
-#     return result
+
 
 @main_bp.route('/')
 def index():

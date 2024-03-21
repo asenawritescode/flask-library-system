@@ -8,7 +8,7 @@ def page_not_found(e):
 def internal_server_error(e):
     return render_template('error/500.html'), 500
 
-RESULTS_PER_PAGE = 5    
+RESULTS_PER_PAGE = 10
 
 class Production:
     DEBUG = False

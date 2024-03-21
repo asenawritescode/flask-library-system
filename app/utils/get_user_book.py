@@ -9,7 +9,7 @@ def get_book_user_dict(Transaction, User, Book):
     # format with the structure {id : f"{first_name} {last_name} - {reg_number}"}
     user_result = {}
     for user in users:
-        user_result[user.id] = f"{user.first_name} {user.last_name} - {user.reg_number}"
+        user_result[user.reg_number] = f"{user.first_name} {user.last_name} - {user.reg_number}"
 
     # fetch all books in the database
     books = Book.get_all_from('id','isbn', 'name')
@@ -17,7 +17,7 @@ def get_book_user_dict(Transaction, User, Book):
     # format with the structure {id : f"{isbn} - {name}"}
     book_result = {}
     for book in books:
-        book_result[book.id] = f"{book.isbn} - {book.name}"
+        book_result[book.isbn] = f"{book.isbn} - {book.name}"
         
     # Retrieve user IDs with odd transaction counts and their latest transactions
     odd_user_transactions = db.session.query(
@@ -33,6 +33,8 @@ def get_book_user_dict(Transaction, User, Book):
         
         # Retrieve the book ID for the latest transaction of the user
         latest_book_transaction = Transaction.query.filter_by(user_id=user_id, created_at=latest_transaction).first()
+        print(latest_book_transaction.book_id)
+
         book_id = latest_book_transaction.book_id
         book_diplay = book_result[book_id]
         
