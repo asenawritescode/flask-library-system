@@ -25,9 +25,25 @@ def cli():
 )
 def runserver(env, port):
     app = create_app(env)
+    # print('Running Server {env}'.format(env=env))
     with app.app_context():
         db.create_all()
     app.run(port=port)
+
+# cli command to run tests
+@click.command()
+def runtest():
+    """Testing """
+    import unittest
+    import sys
+
+    tests = unittest.TestLoader().discover("tests")
+
+    results = unittest.TextTestRunner(verbosity=3).run(tests)
+
+    if not results.wasSuccessful():
+
+        sys.exit(1)
 
 # @click.command()
 # @click.option(
@@ -52,6 +68,7 @@ def runserver(env, port):
 #     return
 
 cli.add_command(runserver)
+cli.add_command(runtest)
 # cli.add_command(init_db)
 # cli.add_command(migrate)
 
